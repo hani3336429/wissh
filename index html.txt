@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f06, #ffed4a, #06f);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            animation: fadeIn 2s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ffcc00; /* Gold color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            animation: bounceIn 1s ease-out;
+        }
+
+        p {
+            font-size: 1.5em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: #ffcc00;
+            color: #333;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: #ffe066;
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        .heart {
+            position: absolute;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: floatUp 5s infinite ease-out;
+            opacity: 0;
+            z-index: 5;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -50%;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: 50%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.1); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(-45deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(-45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="birthday-greeting">Happy Birthday!</h1>
+        <p>Wishing you a day filled with joy, laughter, and all the wonderful things life has to offer. May your year ahead be even brighter!</p>
+        <button class="cta-button" onclick="celebrate()">Click for a little magic!</button>
+    </div>
+
+    <script>
+        function celebrate() {
+            const greeting = document.getElementById('birthday-greeting');
+            greeting.textContent = 'Happy Birthday, [Hamna]!'; // You can customize this!
+            // Or add a dynamic name input later if you want.
+
+            // Add more hearts when button is clicked
+            for (let i = 0; i < 5; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            document.body.appendChild(heart);
+
+            const size = Math.random() * 30 + 20; // 20-50px
+            heart.style.width = size + 'px';
+            heart.style.height = size + 'px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.bottom = '-50px'; // Start from below the screen
+
+            const animationDuration = Math.random() * 3 + 4; // 4-7s
+            heart.style.animationDuration = animationDuration + 's';
+            heart.style.animationDelay = Math.random() * 0.5 + 's';
+
+            // Remove heart after animation
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        // Create some initial hearts on load
+        window.onload = function() {
+            for (let i = 0; i < 10; i++) {
+                createHeart();
+            }
+        };
+    </script>
+</body>
+</html>
